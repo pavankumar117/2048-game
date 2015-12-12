@@ -32,16 +32,16 @@ function myfunction() { //parent function that prints the tabble
     // 37 for left arrow
   $(document).keydown(function(e){
     if (e.keyCode == 37) {
-      printnumbers();
       shiftleft();
+      printnumbers();
       return false;
     }
   });
     // 38 for up arrow
   $(document).keydown(function(e){
     if (e.keyCode == 38) {
-      //printnumbers();
       shiftup();
+      printnumbers();
       return false;
     }
   });
@@ -49,8 +49,8 @@ function myfunction() { //parent function that prints the tabble
     // 39 for right arrow
   $(document).keydown(function(e){
     if (e.keyCode == 39) {
-      //printnumbers();
       shiftright();
+      printnumbers();
     }
   });
 
@@ -58,7 +58,7 @@ function myfunction() { //parent function that prints the tabble
   $(document).keydown(function(e) {
     if (e.keyCode == 40) {
       shiftbottom();
-      //printnumbers();
+      printnumbers();
       return false;
     }
   });
@@ -76,10 +76,10 @@ function printnumbers() {
   var numberrow = Math.ceil(Math.random()*row)-1;
   var numbercol = Math.ceil(Math.random()*col)-1;
   var cellvalue = mytable1.rows[numberrow].cells[numbercol].innerHTML;
-  if (cellvalue === "") {
-    mytable1.rows[numberrow].cells[numbercol].innerHTML=arr1;
-  } else {
+  if (cellvalue !== "") {
     printnumbers();
+  } else if(cellvalue === "") {
+    mytable1.rows[numberrow].cells[numbercol].innerHTML=arr1;
   }
 }
 
@@ -88,6 +88,7 @@ function shiftleft() {
   for(var i = 0; i < 4; i++) {
     for(var j = 0; j < 4; j++) {
       var value = mytable1.rows[i].cells[j].innerHTML;
+      //mytable1.rows[i].cells[j].innerHTML="";
       // If values are equal to null
       if ( value === "") {
         //var tempi = i;
@@ -95,7 +96,6 @@ function shiftleft() {
         for (var k = j+1; k < 4; k++ ) {
           var value0 = mytable1.rows[i].cells[k].innerHTML;
           if ( value0 !== "" && value === value0) {
-            console.log('check in value0 not equal to null and val == val');
             var x = parseInt(value);
             var y = parseInt(value0);
             var val = (x+y);
@@ -104,13 +104,13 @@ function shiftleft() {
 
           }
           if ( value0 !== "" && value !== value0) {
-            console.log('check in value0 not equal to null and val !not= val');
+            //console.log('check in value0 not equal to null and val !not= val');
             mytable1.rows[i].cells[k].innerHTML ="";
             mytable1.rows[i].cells[tempj].innerHTML =value0;
           }
         }
       } else if (value !== "" ) {
-        console.log('in temp value !not== null');
+        //console.log('in temp value !not== null');
           var tempm = i;
           var tempn = j;
           for (var l = j+1; l < 4; l++) {
@@ -133,8 +133,55 @@ function shiftleft() {
 }
 
 function shiftright() {
+  for (var i = 3; i >= 0; i--) {
+    for (var j = 3; j >= 0; j--) {
+      var value = mytable1.rows[i].cells[j].innerHTML;
+      //console.log(value);
+      if ( value === "") {
+        //var tempi = i;
 
+        var tempj = j;
+        for (var k = j-1; k >= 0; k--) {
+          var value0 = mytable1.rows[i].cells[k].innerHTML;
+          if ( value0 !== "" && value === value0) {
+            var x = parseInt(value);
+            var y = parseInt(value0);
+            var val = (x+y);
+            mytable1.rows[i].cells[k].innerHTML ="";
+            mytable1.rows[i].cells[tempj].innerHTML =val;
+          }
+          if ( value0 !== "" && value !== value0) {
+            //console.log('check in value0 not equal to null and val !not= val');
+            mytable1.rows[i].cells[k].innerHTML ="";
+            mytable1.rows[i].cells[tempj].innerHTML =value0;
+          }
+        }
+      }else if (value !== "" ) {
+        //console.log('in temp value !not== null');
+          var tempm = i;
+          var tempn = j;
+          for (var l = j-1; l >= 0; l--) {
+            var value1 = mytable1.rows[i].cells[l].innerHTML;
+            if (value1 !== "" & value === value1) {
+              var m = parseInt(value);
+              var n = parseInt(value1);
+              var value2 = (m+n);
+              mytable1.rows[i].cells[l].innerHTML="";
+              mytable1.rows[i].cells[tempn].innerHTML=value2;
+            }
+            if (value1 !== "" && value !== value1) {
+              mytable1.rows[i].cells[l].innerHTML="";
+              mytable1.rows[i].cells[l].innerHTML =value1;
+            }
+          }
+        }
+      }
+    }
 }
+
+
+
+
 
 function shifttop() {
 
