@@ -33,13 +33,15 @@ function myfunction() { //parent function that prints the tabble
   $(document).keydown(function(e){
     if (e.keyCode == 37) {
       printnumbers();
+      shiftleft();
       return false;
     }
   });
     // 38 for up arrow
   $(document).keydown(function(e){
     if (e.keyCode == 38) {
-      printnumbers();
+      //printnumbers();
+      shiftup();
       return false;
     }
   });
@@ -55,7 +57,7 @@ function myfunction() { //parent function that prints the tabble
     //40 for down arrow
   $(document).keydown(function(e) {
     if (e.keyCode == 40) {
-      test();
+      shiftbottom();
       //printnumbers();
       return false;
     }
@@ -81,57 +83,63 @@ function printnumbers() {
   }
 }
 
-
-function test() {
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-
-      /*
-      var valuetemp = value;
-      mytable1.rows[i].cells[(j)].innerHTML="";
-      if (valuetemp !== "") {
-        console.log(value + "row" + i + "cell" +j);
-        if (i === 0) {
-          i=i+3;
-          mytable1.rows[i].cells[j].innerHTML=value;
-        }
-        if (i === 1) {
-          i=i+2;
-          mytable1.rows[i].cells[j].innerHTML=value;
-        }
-        if (i === 2) {
-          i=i+1;
-          mytable1.rows[i].cells[j].innerHTML=value;
-        }
-        if (i === 3) {
-          console.log('already at the end');
-        }*/
-        if(i !== "") {
-          var value = mytable1.rows[i].cells[j].innerHTML;
-          console.log('value here is one');
-          console.log(value+"i"+i+"j"+j);
-          var valuetemp = value;
-        }
-        if(i === 0) {
-          i=i+3;
-          mytable1.rows[i].cells[j].innerHTML=valuetemp;
-        }
-    }
-  }
-}
-
-
-
-
-/* code that replaces the text in the element */
+// Funcion for moving elements to left side
 function shiftleft() {
   for(var i = 0; i < 4; i++) {
-    if(i === "") {
-      for(var j = i+1; j < 4; j++) {
-        if(j !== 0){
-          
+    for(var j = 0; j < 4; j++) {
+      var value = mytable1.rows[i].cells[j].innerHTML;
+      // If values are equal to null
+      if ( value === "") {
+        //var tempi = i;
+        var tempj = j;
+        for (var k = j+1; k < 4; k++ ) {
+          var value0 = mytable1.rows[i].cells[k].innerHTML;
+          if ( value0 !== "" && value === value0) {
+            console.log('check in value0 not equal to null and val == val');
+            var x = parseInt(value);
+            var y = parseInt(value0);
+            var val = (x+y);
+            mytable1.rows[i].cells[k].innerHTML ="";
+            mytable1.rows[i].cells[tempj].innerHTML =val;
+
+          }
+          if ( value0 !== "" && value !== value0) {
+            console.log('check in value0 not equal to null and val !not= val');
+            mytable1.rows[i].cells[k].innerHTML ="";
+            mytable1.rows[i].cells[tempj].innerHTML =value0;
+          }
+        }
+      } else if (value !== "" ) {
+        console.log('in temp value !not== null');
+          var tempm = i;
+          var tempn = j;
+          for (var l = j+1; l < 4; l++) {
+            var value1 = mytable1.rows[i].cells[l].innerHTML;
+            if (value1 !== "" & value === value1) {
+              var m = parseInt(value);
+              var n = parseInt(value1);
+              var value2 = (m+n);
+              mytable1.rows[i].cells[l].innerHTML="";
+              mytable1.rows[i].cells[tempn].innerHTML=value2;
+            }
+            if (value1 !== "" && value !== value1) {
+              mytable1.rows[i].cells[l].innerHTML="";
+              mytable1.rows[i].cells[l].innerHTML =value1;
+            }
+          }
         }
       }
     }
-  }
+}
+
+function shiftright() {
+
+}
+
+function shifttop() {
+
+}
+
+function shiftbottom() {
+
 }
