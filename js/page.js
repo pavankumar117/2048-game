@@ -127,9 +127,9 @@ function shiftleft() {
               mytable1.rows[i].cells[l].innerHTML =value1;
             }
           }
-        }
-      }
+       }
     }
+  }
 }
 
 function shiftright() {
@@ -179,14 +179,97 @@ function shiftright() {
     }
 }
 
+//function for moving elements UP
 
+function shiftup() {
+  for (var j = 0; j < 4; j++ ) {
+    for (var i = 0; i < 4; i++) {
+      var value = mytable1.rows[i].cells[j].innerHTML;
+      if ( value === "") {
+        //var tempi = i;
 
-
-
-function shifttop() {
-
+        var tempi = i;
+        for (var k = i+1; k < 4; k++) {
+          var value0 = mytable1.rows[k].cells[j].innerHTML;
+          if ( value0 !== "" && value === value0) {
+            var x = parseInt(value);
+            var y = parseInt(value0);
+            var val = (x+y);
+            mytable1.rows[k].cells[j].innerHTML ="";
+            mytable1.rows[tempi].cells[j].innerHTML =val;
+          }
+          if ( value0 !== "" && value !== value0) {
+            //console.log('check in value0 not equal to null and val !not= val');
+            mytable1.rows[k].cells[j].innerHTML ="";
+            mytable1.rows[tempi].cells[j].innerHTML =value0;
+          }
+        }
+      }else if (value !== "" ) {
+        //console.log('in temp value !not== null');
+          var tempn = i;
+          for (var l = i+1; l < 4; l++) {
+            var value1 = mytable1.rows[i].cells[l].innerHTML;
+            if (value1 !== "" & value === value1) {
+              var m = parseInt(value);
+              var n = parseInt(value1);
+              var value2 = (m+n);
+              mytable1.rows[tempn].cells[j].innerHTML="";
+              mytable1.rows[tempn].cells[j].innerHTML=value2;
+            }
+            if (value1 !== "" && value !== value1) {
+              mytable1.rows[l].cells[j].innerHTML="";
+              mytable1.rows[l].cells[j].innerHTML =value1;
+            }
+          }
+        }
+      }
+    }
 }
+
+//function for moving elements down
 
 function shiftbottom() {
+    for (var j = 3; j >= 0; j--) {
+      for (var i = 3; i >= 0; i--) {
+        var value = mytable1.rows[i].cells[j].innerHTML;
+        //console.log(value);
+        if ( value === "") {
+          //var tempi = i;
 
-}
+          var tempi = i;
+          for (var k = i-1; k >= 0; k--) {
+            var value0 = mytable1.rows[k].cells[j].innerHTML;
+            if ( value0 !== "" && value === value0) {
+              var x = parseInt(value);
+              var y = parseInt(value0);
+              var val = (x+y);
+              mytable1.rows[k].cells[j].innerHTML ="";
+              mytable1.rows[tempi].cells[j].innerHTML =val;
+            }
+            if ( value0 !== "" && value !== value0) {
+              //console.log('check in value0 not equal to null and val !not= val');
+              mytable1.rows[k].cells[j].innerHTML ="";
+              mytable1.rows[tempi].cells[j].innerHTML =value0;
+            }
+          }
+        }else if (value !== "" ) {
+          //console.log('in temp value !not== null');
+            var tempn = i;
+            for (var l = i-1; l >= 0; l--) {
+              var value1 = mytable1.rows[l].cells[j].innerHTML;
+              if (value1 !== "" & value === value1) {
+                var m = parseInt(value);
+                var n = parseInt(value1);
+                var value2 = (m+n);
+                mytable1.rows[l].cells[j].innerHTML="";
+                mytable1.rows[tempn].cells[j].innerHTML=value2;
+              }
+              if (value1 !== "" && value !== value1) {
+                mytable1.rows[l].cells[j].innerHTML="";
+                mytable1.rows[l].cells[j].innerHTML =value1;
+              }
+            }
+          }
+        }
+      }
+  }

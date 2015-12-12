@@ -8,12 +8,8 @@
   width: 30em;
 }
 
-#c00 {
-  background-color: red;
-
-}
 td {
-  width: 100px;
+  background-color: lightgray;
   height: 100px;
-  display:;
+  width: 100px;
 }
