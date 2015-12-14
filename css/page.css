@@ -1,15 +1,26 @@
-#mytable1 {
-  background-color: white;
-  margin-top: auto;
-  margin-left: auto;
-  margin-bottom: auto;
-  margin-right: auto;
-  height: 30em;
-  width: 30em;
-}
-
 td {
+  font-size: 50px;
   background-color: lightgray;
   height: 100px;
   width: 100px;
+}
+
+
+#mytable1 {
+  background-color: white;
+  margin-left: 400px;
+  margin-top: 150px;
+  margin-right: 200px;
+}
+
+#newGame{
+  background-color: orange;
+  height: 700px;
+  margin: 0px;
+  width: 500px;
+
+}
+
+body > #newGame {
+  background-color: red;
 }
